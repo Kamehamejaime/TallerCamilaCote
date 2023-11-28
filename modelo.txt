@@ -1,0 +1,91 @@
+CREATE DATABASE IF NOT EXISTS camilacote;
+USE camilacote;
+
+CREATE TABLE IF NOT EXISTS Clientes (
+    ClientesId INT AUTO_INCREMENT,
+    Nombre VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Telefono VARCHAR(255) NOT NULL,
+    PRIMARY KEY (ClientesId)
+);
+
+CREATE TABLE IF NOT EXISTS TiposDePrenda (
+    TiposDePrendaId INT AUTO_INCREMENT,
+    Nombre VARCHAR(255) NOT NULL,
+    PRIMARY KEY (TiposDePrendaId)
+);
+
+CREATE TABLE IF NOT EXISTS Servicios (
+    ServiciosId INT AUTO_INCREMENT,
+    Nombre VARCHAR(255) NOT NULL,
+    Descripcion VARCHAR(255),
+    Precio DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (ServiciosId)
+);
+
+CREATE TABLE IF NOT EXISTS Colaboradores (
+    ColaboradoresId INT AUTO_INCREMENT,
+    Rut VARCHAR(255) NOT NULL,
+    Nombre VARCHAR(255) NOT NULL,
+    Telefono VARCHAR(255) NOT NULL,
+    NumeroCuenta VARCHAR(255) NOT NULL,
+    TipoCuenta VARCHAR(255) NOT NULL,
+    Banco VARCHAR(255) NOT NULL,
+    PRIMARY KEY (ColaboradoresId)
+);
+
+CREATE TABLE IF NOT EXISTS ServiciosTipoDePrenda (
+    ServiciosTipoDePrendaId INT AUTO_INCREMENT,
+    ServiciosId INT,
+    TiposDePrendaId INT,
+    PRIMARY KEY (ServiciosTipoDePrendaId),
+    FOREIGN KEY (ServiciosId) REFERENCES Servicios(ServiciosId),
+    FOREIGN KEY (TiposDePrendaId) REFERENCES TiposDePrenda(TiposDePrendaId)
+);
+
+CREATE TABLE IF NOT EXISTS ColaboradoresServicios (
+    ColaboradoresServiciosId INT AUTO_INCREMENT,
+    ColaboradoresId INT,
+    ServiciosId INT,
+    PRIMARY KEY (ColaboradoresServiciosId),
+    FOREIGN KEY (ColaboradoresId) REFERENCES Colaboradores(ColaboradoresId),
+    FOREIGN KEY (ServiciosId) REFERENCES Servicios(ServiciosId)
+);
+
+CREATE TABLE IF NOT EXISTS Guias (
+    GuiasId INT AUTO_INCREMENT,
+    Fecha DATE NOT NULL,
+    Cliente VARCHAR(255) NOT NULL,
+    TotalLiquido DECIMAL(10, 2) NOT NULL,
+    CantidadPrendas INT NOT NULL,
+    TiposDePrendaId INT,
+    PRIMARY KEY (GuiasId),
+    FOREIGN KEY (TiposDePrendaId) REFERENCES TiposDePrenda(TiposDePrendaId)
+);
+
+CREATE TABLE IF NOT EXISTS Boletas (
+    BoletasId INT AUTO_INCREMENT,
+    GuiasId INT,
+    Fecha DATE NOT NULL,
+    PRIMARY KEY (BoletasId),
+    FOREIGN KEY (GuiasId) REFERENCES Guias(GuiasId)
+);
+
+CREATE TABLE IF NOT EXISTS Pagos (
+    PagosId INT AUTO_INCREMENT,
+    Fecha DATE NOT NULL,
+    cantidadPrendas INT NOT NULL,
+    TipoDePrendaId INT,
+    PRIMARY KEY (PagosId),
+    FOREIGN KEY (TipoDePrendaId) REFERENCES TiposDePrenda(TiposDePrendaId)
+);
+
+CREATE TABLE IF NOT EXISTS PagosColaboradores (
+    PagosColaboradoresId INT AUTO_INCREMENT,
+    PagosId INT,
+    ColaboradoresId INT,
+    Monto DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (PagosColaboradoresId),
+    FOREIGN KEY (PagosId) REFERENCES Pagos(PagosId),
+    FOREIGN KEY (ColaboradoresId) REFERENCES Colaboradores(ColaboradoresId)
+);
