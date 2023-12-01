@@ -43,8 +43,10 @@
                             <%= colaborador.Banco %>
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="/nuevoColaborador" role="button">Editar</a>
-                            <a class="btn btn-danger" href="/eliminarColaborador" role="button">Borrar</a>
+                            <form action="/eliminarColaborador" method="POST">
+                                <input type="hidden" name="ColaboradoresId" value="<%= colaborador.ColaboradoresId %>">
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            </form>
                         </td>
                     </tr>
                     <% }); %>

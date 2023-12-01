@@ -6,10 +6,6 @@ import mysql from "mysql";
 import { error, log } from "console";
 import bodyParser from "body-parser";
 
-
-
-
-
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -40,17 +36,18 @@ connection.connect((error) => {
   console.log("Conexión exitosa a la base de datos");
 });
 
+
+//Mostrar la tabla colaboradores
 app.get("/colaboradores", (req, res) => {
   connection.query("SELECT * FROM colaboradores", (err, rows) => {
     if (err) throw err;
 
-    res.render("colaboradores", { colaboradores: rows });
+    res.render("colaboradores", { colaboradores: rows, title: "colaboradores"});
   });
 });
 
 //Insertar datos en la tabla colaboradores
-/*
-app.post("/colaboradores", (req, res) => {
+app.post("/nuevoColaborador", (req, res) => {
   const { Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco } = req.body;
 
   connection.query(
@@ -66,12 +63,23 @@ app.post("/colaboradores", (req, res) => {
     (err, rows) => {
       if (err) throw err;
 
-      res.render("colaboradores", {
+      res.render("./index", {
         colaboradores: rows,
-        title: "Colaboradores",
+        title: "Página principal",
       });
     }
   );
-});*/
+});
+
+
+//Eliminar un registro 
+app.post("/eliminarColaborador", (req, res) => {
+  const { ColaboradoresId } = req.body;
+  connection.query("DELETE FROM colaboradores WHERE ColaboradoresId = ?", [ColaboradoresId], (err, rows) => {
+     if (err) throw err;
+     res.redirect("/colaboradores");
+  });
+ });
+
 
 app.listen(PORT, () => console.log("Servidor escuchando en puerto {PORT}"));
