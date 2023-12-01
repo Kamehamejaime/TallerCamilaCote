@@ -63,10 +63,7 @@ app.post("/nuevoColaborador", (req, res) => {
     (err, rows) => {
       if (err) throw err;
 
-      res.render("./index", {
-        colaboradores: rows,
-        title: "Página principal",
-      });
+      res.redirect("/colaboradores");
     }
   );
 });
@@ -80,6 +77,17 @@ app.post("/eliminarColaborador", (req, res) => {
      res.redirect("/colaboradores");
   });
  });
+
+
+ app.post("/actualizarColaborador", (req, res) => {
+  const { Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco } = req.body;
+  connection.query("UPDATE colaboradores SET Rut = ?, Nombre = ?, Telefono = ?, Numero Cuenta = ?, TipoCuenta = ? WHERE ColaboradoresId = ?", [Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco], (err, rows) => {
+     if (err) throw err;
+     res.redirect("/colaboradores");
+  });
+ });
+
+
 
 
 app.listen(PORT, () => console.log("Servidor escuchando en puerto {PORT}"));

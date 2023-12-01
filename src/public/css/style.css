@@ -18,6 +18,15 @@ footer {
     
 }
 
+#botonesTabla{
+    display: flex;
+    justify-content: start;
+    align-content: center;
+}
+#botonTabla{
+    margin-left: .5rem;
+}
+
 
 /*******Tabla de Clientes*******/
 

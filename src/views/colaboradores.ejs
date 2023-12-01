@@ -1,12 +1,12 @@
 <%-include('templates/head')  %>
     <%-include('templates/header') %>
         <%- include('templates/navbar') %>
-<div class="container-fluid">
+<div class="container">
     <h1>Colaboradores</h1>
 </div>
 
 <div class="container-fluid">
-    <div class="container-fluid">
+    <div class="container">
         <a class="btn btn-primary" href="/nuevoColaborador" role="button">Nuevo Colaborador</a>
     </div>
     <div class="container scroll-table">
@@ -43,10 +43,16 @@
                             <%= colaborador.Banco %>
                         </td>
                         <td>
-                            <form action="/eliminarColaborador" method="POST">
-                                <input type="hidden" name="ColaboradoresId" value="<%= colaborador.ColaboradoresId %>">
-                                <button type="submit" class="btn btn-danger">Borrar</button>
-                            </form>
+                            <div class="container" id="botonesTabla">
+
+                                <form action="/editarColaborador" method="POST" id="botonTabla">
+                                    <a class="btn btn-primary" href="/editarColaborador">Editar</a>
+                                </form>
+                                <form action="/eliminarColaborador" method="POST" id="botonTabla">
+                                    <input type="hidden" name="ColaboradoresId" value="<%= colaborador.ColaboradoresId %>">
+                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <% }); %>

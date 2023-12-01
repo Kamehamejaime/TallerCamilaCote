@@ -1,0 +1,23 @@
+<%-include('templates/head')  %>
+<%-include('templates/header')  %>
+<%- include('templates/navbar') %>
+<form action="/editarColaborador" method="POST">
+    <input type="hidden" name="Rut" value="<%= colaborador.Rut %>">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="Nombre" value="<%= colaborador.Nombre %>">
+    <label for="cargo">Telefono:</label>
+    <input type="text" name="Telefono" value="<%= colaborador.Telefono %>">
+    <label for="cargo">Numero de cuenta:</label>
+    <input type="text" name="NumeroCuenta" value="<%= colaborador.NumeroCuenta %>">
+    <label for="cargo">Tipo de cuenta</label>
+    <input type="text" name="TipoCuenta" value="<%= colaborador.TipoCuenta %>">
+    <label for="cargo">Banco:</label>
+    <input type="text" name="Banco" value="<%= colaborador.Banco %>">
+    <button type="submit" class="btn btn-primary">Editar</button>
+   </form>
+
+   <%- include('templates/footer') %>
+
+</body>
+
+</html>
