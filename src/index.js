@@ -4,13 +4,14 @@ import { fileURLToPath } from "url";
 import indexRoutes from "./routes/index.js";
 import mysql from "mysql";
 import { error, log } from "console";
+import bodyParser from "body-parser";
 
-//const { default: morgan } = await import("morgan");
+
+
 
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 
 //SETTINGS
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.set("views", join(__dirname, "views"));
 
 app.use(indexRoutes);
 app.use(express.static(join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Configurar la conexión a la base de datos
 const connection = mysql.createConnection({
@@ -38,31 +40,38 @@ connection.connect((error) => {
   console.log("Conexión exitosa a la base de datos");
 });
 
-app.get('/colaboradores', (req, res) => {
-    connection.query('SELECT * FROM colaboradores', (err, rows) => {
-       if (err) throw err;
-   
-       res.render('colaboradores', { colaboradores: rows });
-    });
-   });
+app.get("/colaboradores", (req, res) => {
+  connection.query("SELECT * FROM colaboradores", (err, rows) => {
+    if (err) throw err;
 
+    res.render("colaboradores", { colaboradores: rows });
+  });
+});
 
-   //Insertar datos en la tabla colaboradores
-   app.post('/colaboradores', (req, res) => {
-    const { name, position } = req.body;
-   
-    connection.query('INSERT INTO Colaboradores SET ?',
-       {
-         name: name,
-         position: position
-       },
-       (err, rows) => {
-         if (err) throw err;
-   
-         res.render('colaboradores', { colaboradores: rows, title:'Colaboradores'});
-       }
-    );
-   });
-   
+//Insertar datos en la tabla colaboradores
+/*
+app.post("/colaboradores", (req, res) => {
+  const { Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco } = req.body;
+
+  connection.query(
+    "INSERT INTO colaboradores SET ?",
+    {
+      Rut: Rut,
+      Nombre: Nombre,
+      Telefono: Telefono,
+      NumeroCuenta: NumeroCuenta,
+      TipoCuenta: TipoCuenta,
+      Banco: Banco,
+    },
+    (err, rows) => {
+      if (err) throw err;
+
+      res.render("colaboradores", {
+        colaboradores: rows,
+        title: "Colaboradores",
+      });
+    }
+  );
+});*/
 
 app.listen(PORT, () => console.log("Servidor escuchando en puerto {PORT}"));

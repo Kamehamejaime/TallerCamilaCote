@@ -1,47 +1,58 @@
 <%-include('templates/head')  %>
     <%-include('templates/header') %>
         <%- include('templates/navbar') %>
+<div class="container-fluid">
+    <h1>Colaboradores</h1>
+</div>
 
-            <h1>Colaboradores</h1>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <a class="btn btn-primary" href="/nuevoColaborador" role="button">Nuevo Colaborador</a>
+    </div>
+    <div class="container scroll-table">
+        <table class="table table-hover overflow-scroll">
+            <thead role="rowgroup">
+                <tr role="row">
+                    <th role="columnheader">Rut</throle>
+                    <th role="columnheader">Nombre</th>
+                    <th role="columnheader">Telefono</th>
+                    <th role="columnheader">Numero de Cuenta</th>
+                    <th role="columnheader">Tipo de Cuenta</th>
+                    <th role="columnheader">Banco</th>
+                </tr>
+            </thead>
+            <tbody role="rowgroup">
+                <% colaboradores.forEach(function(colaborador) { %>
+                    <tr role="row">
+                        <td role="row">
+                            <%= colaborador.Rut %>
+                        </td>
+                        <td role="row">
+                            <%= colaborador.Nombre %>
+                        </td>
+                        <td role="row">
+                            <%= colaborador.Telefono %>
+                        </td>
+                        <td role="row">
+                            <%= colaborador.NumeroCuenta %>
+                        </td>
+                        <td role="row">
+                            <%= colaborador.TipoCuenta %>
+                        </td>
+                        <td role="row">
+                            <%= colaborador.Banco %>
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="/nuevoColaborador" role="button">Editar</a>
+                            <a class="btn btn-danger" href="/eliminarColaborador" role="button">Borrar</a>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
 
-            <div class="container scroll-table">
-                <table class="table table-hover overflow-scroll">
-                    <thead role="rowgroup">
-                        <tr role="row">
-                            <th role="columnheader">Rut</throle>
-                            <th role="columnheader">Nombre</th>
-                            <th role="columnheader">Telefono</th>
-                            <th role="columnheader">Numero de Cuenta</th>
-                            <th role="columnheader">Tipo de Cuenta</th>
-                            <th role="columnheader">Banco</th>
-                        </tr>
-                    </thead>
-                    <tbody role="rowgroup">
-                        <% colaboradores.forEach(function(colaborador) { %>
-                            <tr role="row">
-                                <td role="row">
-                                    <%= colaborador.Rut %>
-                                </td>
-                                <td role="row">
-                                    <%= colaborador.Nombre %>
-                                </td>
-                                <td role="row">
-                                    <%= colaborador.Telefono %>
-                                </td>
-                                <td role="row">
-                                    <%= colaborador.NumeroCuenta %>
-                                </td>
-                                <td role="row">
-                                    <%= colaborador.TipoCuenta %>
-                                </td>
-                                <td role="row">
-                                    <%= colaborador.Banco %>
-                                </td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
-            </div>
+</div>
             <%- include('templates/footer') %>
 </body>
 
