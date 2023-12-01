@@ -2,29 +2,38 @@
 <%-include('templates/header')  %>
 <%- include('templates/navbar') %>
 <h1>Nuevo Colaborador</h1>
-
-
-<form action="/nuevoColaborador" method="post">
-    <label for="Rut">Rut:</label>
-    <input type="text" id="Rut" name="Rut" required>
+    <div class="container-fluid" id="formColaborador">
+    <form action="/nuevoColaborador" method="post">
+            <div class="mb-3">
+            <label for="Rut" class="form-label">Rut:</label>
+            <input type="text" class="form-control" id="Rut" name="Rut" required>
+            </div>
+            <div class="mb-3">
+                <label for="Nombre"class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="Telefono"class="form-label">Telefono:</label>
+                <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+            </div>
+            <div class="mb-3">
+                <label for="NumeroCuenta"class="form-label">Numero de Cuenta:</label>
+                <input type="text" class="form-control" id="NumeroCuenta" name="NumeroCuenta" required>
+            </div>
+            <div class="mb-3">
+                <label for="TipoCuenta"class="form-label">Tipo de Cuenta:</label>
+                <input type="text" class="form-control" id="TipoCuenta" name="TipoCuenta" required>
+            </div>
+            <div class="mb-3">
+                <label for="Banco"class="form-label">Banco:</label>
+                <input type="text" class="form-control" id="Banco" name="Banco" required>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+            </div>
+        </form>
     
-    <label for="Nombre">Nombre:</label>
-    <input type="text" id="Nombre" name="Nombre" required>
-    
-    <label for="Telefono">Telefono:</label>
-    <input type="text" id="Telefono" name="Telefono" required>
-    
-    <label for="NumeroCuenta">Numero de Cuenta:</label>
-    <input type="text" id="NumeroCuenta" name="NumeroCuenta" required>
-    
-    <label for="TipoCuenta">Tipo de Cuenta:</label>
-    <input type="text" id="TipoCuenta" name="TipoCuenta" required>
-    
-    <label for="Banco">Banco:</label>
-    <input type="text" id="Banco" name="Banco" required>
-    
-    <button type="submit">Enviar</button>
-</form>
 <%- include('templates/footer') %>
 </body>
 
