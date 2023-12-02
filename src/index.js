@@ -6,6 +6,7 @@ import mysql from "mysql";
 import { error, log } from "console";
 import bodyParser from "body-parser";
 
+
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -36,13 +37,15 @@ connection.connect((error) => {
   console.log("Conexión exitosa a la base de datos");
 });
 
-
 //Mostrar la tabla colaboradores
 app.get("/colaboradores", (req, res) => {
   connection.query("SELECT * FROM colaboradores", (err, rows) => {
     if (err) throw err;
 
-    res.render("colaboradores", { colaboradores: rows, title: "colaboradores"});
+    res.render("colaboradores", {
+      colaboradores: rows,
+      title: "colaboradores",
+    });
   });
 });
 
@@ -68,25 +71,49 @@ app.post("/nuevoColaborador", (req, res) => {
   );
 });
 
-
-//Eliminar un registro 
+//Eliminar un registro
 app.post("/eliminarColaborador", (req, res) => {
   const { ColaboradoresId } = req.body;
-  connection.query("DELETE FROM colaboradores WHERE ColaboradoresId = ?", [ColaboradoresId], (err, rows) => {
-     if (err) throw err;
-     res.redirect("/colaboradores");
-  });
- });
+  connection.query(
+    "DELETE FROM colaboradores WHERE ColaboradoresId = ?",
+    [ColaboradoresId],
+    (err, rows) => {
+      if (err) throw err;
+      res.redirect("/colaboradores");
+    }
+  );
+});
 
 
- app.post("/actualizarColaborador", (req, res) => {
+// Mostrar el formulario de edición
+app.get("/colaboradores/:id/editar", (req, res) => {
+  const colaboradorId = req.params.id;
+  connection.query(
+    "SELECT * FROM colaboradores WHERE ColaboradoresId = ?",
+    [colaboradorId],
+    (err, rows) => {
+      if (err) throw err;
+      res.render("editarColaborador", {
+        colaborador: rows[0],
+        title: "Editar Colaborador",
+      });
+    }
+  );
+});
+
+// Actualizar los datos del colaborador
+app.post("/colaboradores/:id/editar", (req, res) => {
+  const colaboradorId = req.params.id;
   const { Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco } = req.body;
-  connection.query("UPDATE colaboradores SET Rut = ?, Nombre = ?, Telefono = ?, Numero Cuenta = ?, TipoCuenta = ? WHERE ColaboradoresId = ?", [Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco], (err, rows) => {
-     if (err) throw err;
-     res.redirect("/colaboradores");
-  });
- });
-
+  connection.query(
+    "UPDATE colaboradores SET Rut = ?, Nombre = ?, Telefono = ?, NumeroCuenta = ?, TipoCuenta = ?, Banco = ? WHERE ColaboradoresId = ?",
+    [Rut, Nombre, Telefono, NumeroCuenta, TipoCuenta, Banco, colaboradorId],
+    (err, rows) => {
+      if (err) throw err;
+      res.redirect("/colaboradores");
+    }
+  );
+});
 
 
 

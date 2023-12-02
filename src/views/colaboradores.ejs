@@ -45,9 +45,7 @@
                         <td>
                             <div class="container" id="botonesTabla">
 
-                                <form action="/editarColaborador" method="POST" id="botonTabla">
-                                    <a class="btn btn-primary" href="/editarColaborador">Editar</a>
-                                </form>
+                                <a class="btn btn-primary" href="/colaboradores/<%= colaborador.ColaboradoresId %>/editar">Editar</a>
                                 <form action="/eliminarColaborador" method="POST" id="botonTabla">
                                     <input type="hidden" name="ColaboradoresId" value="<%= colaborador.ColaboradoresId %>">
                                     <button type="submit" class="btn btn-danger">Borrar</button>
