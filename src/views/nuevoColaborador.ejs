@@ -1,39 +1,40 @@
 <%-include('templates/head')  %>
 <%-include('templates/header')  %>
 <%- include('templates/navbar') %>
+<div class="container">
 <h1>Nuevo Colaborador</h1>
-    <div class="container-fluid" id="formColaborador">
+    <div class="container" id="formColaborador">
     <form action="/nuevoColaborador" method="post">
             <div class="mb-3">
             <label for="Rut" class="form-label">Rut:</label>
-            <input type="text" class="form-control" id="Rut" name="Rut" required>
+            <input class="form-control" placeholder="Ingrese Rut" type="text" class="form-control" id="Rut" name="Rut" required>
             </div>
             <div class="mb-3">
                 <label for="Nombre"class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+                <input class="form-control" placeholder="Ingrese Nombre" type="text" class="form-control" id="Nombre" name="Nombre" required>
             </div>
             <div class="mb-3">
                 <label for="Telefono"class="form-label">Telefono:</label>
-                <input type="text" class="form-control" id="Telefono" name="Telefono" required>
+                <input class="form-control" placeholder="Ingrese Telefono" type="text" class="form-control" id="Telefono" name="Telefono" required>
             </div>
             <div class="mb-3">
                 <label for="NumeroCuenta"class="form-label">Numero de Cuenta:</label>
-                <input type="text" class="form-control" id="NumeroCuenta" name="NumeroCuenta" required>
+                <input class="form-control" placeholder="Ingrese Numero de cuenta" type="text" class="form-control" id="NumeroCuenta" name="NumeroCuenta" required>
             </div>
             <div class="mb-3">
                 <label for="TipoCuenta"class="form-label">Tipo de Cuenta:</label>
-                <input type="text" class="form-control" id="TipoCuenta" name="TipoCuenta" required>
+                <input class="form-control" placeholder="Ingrese Tipo de cuenta" type="text" class="form-control" id="TipoCuenta" name="TipoCuenta" required>
             </div>
             <div class="mb-3">
                 <label for="Banco"class="form-label">Banco:</label>
-                <input type="text" class="form-control" id="Banco" name="Banco" required>
+                <input class="form-control" placeholder="Ingrese Banco" type="text" class="form-control" id="Banco" name="Banco" required>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
             </div>
         </form>
-    
+    </div>
 <%- include('templates/footer') %>
 </body>
 

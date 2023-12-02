@@ -10,12 +10,8 @@ footer {
     margin-top: 3rem;
 }
 
-#formColaborador{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    width: 90rem;
-    
+navbar{
+    background-color:#00365e ;
 }
 
 #botonesTabla{
