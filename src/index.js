@@ -116,5 +116,17 @@ app.post("/colaboradores/:id/editar", (req, res) => {
 });
 
 
+//Mostrar nombres de los colaboradores en un dropdown menú
+app.get("/pagoColaboradores", (req, res) => {
+  connection.query("SELECT Nombre,Rut FROM colaboradores", (err, rows) => {
+    if (err) throw err;
+
+    res.render("pagoColaboradores", {
+      colaboradores: rows,
+      title: "Pagos Colaboradores",
+    });
+  });
+});
+
 
 app.listen(PORT, () => console.log("Servidor escuchando en puerto {PORT}"));

@@ -19,5 +19,7 @@ router.get("/eliminarColaborador", (req, res) => res.render("eliminarColaborador
 
 router.get("public/css", (req, res) => res.sendFile("style.css"));
 
+//router.get("/pagoColaboradores", (req,res) => res.render("pagoColaboradores",{title: "Ingresar pago"}))
+
 
 export default router;

@@ -8,7 +8,12 @@
 <div class="container-fluid">
     <div class="container">
         <a class="btn btn-primary" href="/nuevoColaborador" role="button">Nuevo Colaborador</a>
+        <a class="btn btn-success" href="/pagoColaboradores" role="button">Registrar pago a colaborador</a>
     </div>
+
+    <div class="container-fluid" id="tablas">
+
+    
     <div class="container scroll-table">
         <table class="table table-hover overflow-scroll">
             <thead role="rowgroup">
@@ -45,10 +50,10 @@
                         <td>
                             <div class="container" id="botonesTabla">
 
-                                <a class="btn btn-primary" href="/colaboradores/<%= colaborador.ColaboradoresId %>/editar">Editar</a>
+                                <a class="btn btn-primary btn-sm" href="/colaboradores/<%= colaborador.ColaboradoresId %>/editar">Editar</a>
                                 <form action="/eliminarColaborador" method="POST" id="botonTabla">
                                     <input type="hidden" name="ColaboradoresId" value="<%= colaborador.ColaboradoresId %>">
-                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
                                 </form>
                             </div>
                         </td>
@@ -57,7 +62,45 @@
             </tbody>
         </table>
     </div>
-
+    <div class="container scroll-table">
+        <table class="table table-hover overflow-scroll">
+            <thead role="rowgroup">
+                <tr role="row">
+                    <th role="columnheader">Fecha</throle>
+                    <th role="columnheader">Cant. Prendas</th>
+                    <th role="columnheader">Prenda</th>
+                    <th role="columnheader">Rut</th>
+                    <th role="columnheader">Nombre</th>
+                    <th role="columnheader">Monto</th>
+                </tr>
+            </thead>
+            <tbody role="rowgroup">
+                <% colaboradores.forEach(function(colaborador) { %>
+                    <tr role="row">
+                        <td role="row">
+                            2023-12-04
+                        </td>
+                        <td role="row">
+                            100
+                        </td>
+                        <td role="row">
+                            Pantalones
+                        </td>
+                        <td role="row">
+                            11.111.111-1
+                        </td>
+                        <td role="row">
+                            <% colaborador.Nombre %>
+                        </td>
+                        <td role="row">
+                            500000
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
 </div>
             <%- include('templates/footer') %>
 </body>

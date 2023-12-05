@@ -23,6 +23,12 @@ navbar{
     margin-left: .5rem;
 }
 
+#tablas{
+    display: flex;
+    justify-content: start;
+    align-content: center;
+}
+
 
 /*******Tabla de Clientes*******/
 
