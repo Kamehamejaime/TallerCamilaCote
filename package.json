@@ -2,10 +2,10 @@
   "name": "camilacote",
   "version": "1.0.0",
   "description": "",
-  "main": "/app/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon app/index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
