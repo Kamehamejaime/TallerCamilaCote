@@ -1,0 +1,27 @@
+<%-include('templates/head')  %>
+    <%-include('templates/header') %>
+        <%- include('templates/navbar') %>
+
+        <div class="container" id="formPagos">
+            <form action="/montoColaborador" method="post">
+
+                <label for="Monto"class="form-label">Monto total</label>
+                <input class="form-control" placeholder="Ingrese Monto a pagar" type="text" id="Monto" name="Monto" required>
+
+                <label for="Nombre"class="form-label">Colaborador</label>
+                    <select class="form-select form-select-md mb-3" id="Nombre" name="Nombre" aria-label="Medium select">
+                    
+                    <option selected name="Nombre" id="Nombre">Seleccione colaborador</option>
+                        <% colaboradores.forEach(function(colaboradores) { %>
+                            <option selected><%= colaboradores.Rut %> - <%= colaboradores.Nombre  %></option>
+                            <% }) %>
+                    </select>
+                
+                
+                </form>
+            </div>
+
+        <%- include('templates/footer') %>
+    </body>
+    
+    </html>

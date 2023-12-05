@@ -6,38 +6,42 @@
                 <div class="container" id="formPagos">
                 <form action="/pagoColaboradores" method="post">
                    
-                    <label for="Nombre"class="form-label">Nombre</label>
+                    <label for="Prenda"class="form-label">Prenda</label>
+                    <label for="tiposdeprendaId" type="hidden" name="tiposdeprendaId" id="tiposdeprendaId" ></label>
+                    <select class="form-select form-select-md mb-3" id="Nombre" name="TipoDePrendaId" aria-label="Medium select">
+                    
+                        <option selected name="tiposdeprenda" id="tiposdeprenda">Seleccione prenda</option>
+                        <% tiposdeprenda.forEach(function(tipodeprenda) { %>
+                        <option selected value="<%= tipodeprenda.TiposDePrendaId %>"><%= tipodeprenda.Nombre %></option>
+                            <% }) %>
+                    </select>
+
+                    <label for="CantidadPrendas"class="form-label">Cantidad de prendas</label>
+                    <input class="form-control" placeholder="Ingrese Cantidad" type="text"  id="cantidadPrendas" name="cantidadPrendas" required>
+                    
+                    <label for="startDate">Fecha</label>
+                    <input id="startDate" class="form-control" type="date" name="Fecha" onchange="formatDate()">
+
+
+                    <div class="container">
+                        
+                        <button class="btn btn-primary" type="submit"><a  href="/montoColaborador"></a>Continuar</button>
+                        
+                    </div>
+                    
+                    <!--
+                    <label for="Monto"class="form-label">Monto total</label>
+                    <input class="form-control" placeholder="Ingrese Monto a pagar" type="text" id="Monto" name="Monto" required>
+
+                    <label for="Nombre"class="form-label">Colaborador</label>
                     <select class="form-select form-select-md mb-3" id="Nombre" name="nombre" aria-label="Medium select">
                     
                     <option selected name="Nombre" id="Nombre">Seleccione colaborador</option>
                         <% colaboradores.forEach(function(colaborador) { %>
-                            <option selected><%= colaborador.Nombre %></option>
+                            <option selected><%= colaborador.Rut %> - <%= colaborador.Nombre  %></option>
                             <% }) %>
                     </select>
-                    
-                    <label for="Rut"class="form-label">Rut</label>
-                    <select class="form-select form-select-md mb-3" id="Rut" name="Rut" aria-label="Medium select">
-                    
-                    <option selected name="Rut" id="Rut">Rut</option>
-                        <% colaboradores.forEach(function(colaborador) { %>
-                            <option selected><%= colaborador.Rut %></option>
-                            <% }) %>
-                    </select>
-                    
-                    
-                    <label for="startDate">Fecha</label>
-                    <input id="startDate" class="form-control" type="date" name="Fecha">
-                    <label for="CantidadPrendas"class="form-label">Cantidad de prendas</label>
-                    <input class="form-control" placeholder="Ingrese Cantidad" type="text"  id="CantidadPrendas" name="CantidadPrendas" required>
-                        
-                    <label for="Monto"class="form-label">Monto total</label>
-                    <input class="form-control" placeholder="Ingrese Monto a pagar" type="text" id="Monto" name="Monto" required>
-                     
-                    <div class="mb-3">
-
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-                       
+                       -->
                     </form>
                 </div>
 

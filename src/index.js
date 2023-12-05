@@ -6,7 +6,6 @@ import mysql from "mysql";
 import { error, log } from "console";
 import bodyParser from "body-parser";
 
-
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -84,7 +83,6 @@ app.post("/eliminarColaborador", (req, res) => {
   );
 });
 
-
 // Mostrar el formulario de edición
 app.get("/colaboradores/:id/editar", (req, res) => {
   const colaboradorId = req.params.id;
@@ -115,18 +113,74 @@ app.post("/colaboradores/:id/editar", (req, res) => {
   );
 });
 
-
 //Mostrar nombres de los colaboradores en un dropdown menú
 app.get("/pagoColaboradores", (req, res) => {
-  connection.query("SELECT Nombre,Rut FROM colaboradores", (err, rows) => {
-    if (err) throw err;
+  connection.query(
+    "SELECT ColaboradoresId,Nombre,Rut FROM colaboradores",
+    (err, colaboradores) => {
+      if (err) throw err;
 
-    res.render("pagoColaboradores", {
-      colaboradores: rows,
-      title: "Pagos Colaboradores",
-    });
-  });
+      connection.query(
+        "SELECT  Nombre, TiposDePrendaId FROM tiposdeprenda",
+        (err, prenda) => {
+          if (err) throw err;
+
+          // Renderiza la vista 'pagoColaboradores' con los datos de los colaboradores y las prendas
+          res.render("pagoColaboradores", {
+            colaboradores: colaboradores,
+            tiposdeprenda: prenda,
+            title: "Pagos Colaboradores",
+          });
+        }
+      );
+    }
+  );
 });
 
+
+
+
+//método que inserta los datos en la tabla pagos
+app.post("/pagoColaboradores", (req, res) => {
+  const { cantidadPrendas, Fecha, TipoDePrendaId } = req.body;
+  connection.query("INSERT INTO pagos SET ?", 
+  {
+    Fecha: Fecha,
+    cantidadPrendas: cantidadPrendas,
+    TipoDePrendaId: TipoDePrendaId,
+  },
+  (err, pagos) => {
+    if (err) throw err;
+    res.render("pagoColaborador", {colaboradores:colaboradores, title: "Pago Colaboradores"});
+  }
+  )
+});
+
+app.get("/montoColaborador", (req, res) => {
+  connection.query(
+    "SELECT ColaboradoresId,Nombre,Rut FROM colaboradores",
+    (err, colaboradores) => {
+      if (err) throw err;
+      res.render("montoColaborador", {
+        colaboradores: colaboradores,
+        title: "Monto Colaboradores",
+      });
+    }
+  );
+});
+
+
+
+function formatDate() {
+  var inputDate = document.getElementById("Fecha").value;
+  var parts = inputDate.split("-");
+  var outputDate =
+    parts[0] +
+    "-" +
+    parts[1].padStart(2, "0") +
+    "-" +
+    parts[2].padStart(2, "0");
+  document.getElementById("Fecha").value = outputDate;
+}
 
 app.listen(PORT, () => console.log("Servidor escuchando en puerto {PORT}"));

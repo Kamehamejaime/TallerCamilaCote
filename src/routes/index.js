@@ -12,14 +12,9 @@ router.get("./colaboradores", (req, res) => res.render("colaboradores", { title:
 
 router.get("/nuevoColaborador", (req, res) => res.render("nuevoColaborador",{title: "Nuevo Colaborador"}));
 
-//router.get("/editarColaborador", (req, res) => res.render("editarColaborador",{title: "Editar Colaborador"}));
-//router.get('/actualizarColaborador',(req,res)=> res.render("/colaboradores"));
-
 router.get("/eliminarColaborador", (req, res) => res.render("eliminarColaborador",{title: "Borrar Colaborador"}));
 
 router.get("public/css", (req, res) => res.sendFile("style.css"));
-
-//router.get("/pagoColaboradores", (req,res) => res.render("pagoColaboradores",{title: "Ingresar pago"}))
 
 
 export default router;
